@@ -1,5 +1,7 @@
-let notesCount = 0;
-
+let count = Number(localStorage.getItem("count"));
+if (!count) {
+  localStorage.setItem("count", "0");
+}
 let itemList = document.getElementById("notes");
 
 let noNotesEl = document.getElementById("no-notes");
@@ -32,11 +34,6 @@ const createNote = (noteTitle, noteBody) => {
 
 const createNoteFromInput = (e) => {
   e.preventDefault();
-  notesCount++;
-
-  if (notesCount > 0) {
-    noNotesEl.classList.add("hidden");
-  }
 
   let titleInput = document.getElementById("new-note-title-input");
   let bodyInput = document.getElementById("new-note-body-input");
@@ -52,6 +49,18 @@ const createNoteFromInput = (e) => {
     return;
   }
 
+  count++;
+  localStorage.setItem("count", count);
+
+  if (count > 0) {
+    noNotesEl.classList.add("hidden");
+  }
+
+  if (localStorage.getItem(noteTitle)) {
+    noteTitle = noteTitle + "-1";
+  }
+  localStorage.setItem(noteTitle, noteBody);
+
   createNote(noteTitle, noteBody);
 };
 
@@ -65,14 +74,25 @@ const removeNote = (e) => {
       let li = e.target.parentElement.parentElement;
 
       itemList.removeChild(li);
-      notesCount--;
+      count--;
 
-      if (notesCount < 1) {
+      localStorage.setItem("count", count);
+      localStorage.removeItem(e.target.previousElementSibling.innerText);
+
+      if (count < 1) {
         noNotesEl.classList.remove("hidden");
       }
     }
   }
 };
+
+for (i = 0; i < count + 1; i++) {
+  let noteTitle = localStorage.key(i);
+  let noteBody = localStorage.getItem(noteTitle);
+  if (noteTitle !== "count" && noteTitle) {
+    createNote(noteTitle, noteBody);
+  }
+}
 
 document
   .getElementById("inputForm")
