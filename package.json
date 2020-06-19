@@ -1,0 +1,20 @@
+{
+  "name": "funky-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myscripts.js",
+  "scripts": {
+    "sw-precache": "sw-precache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewAKG/funky-notes.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/AndrewAKG/funky-notes/issues"
+  },
+  "dependencies": {
+    "sw-precache": "^5.2.1"
+  }
+}
