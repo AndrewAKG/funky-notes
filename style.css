@@ -109,8 +109,7 @@ ul li p {
   right: 0;
   width: 30px;
   height: 30px;
-  background-color: red;
-  border: 4px double white;
+  background-color: rgba(0, 0, 0, 0);
   font-weight: bold;
   cursor: pointer;
 }
